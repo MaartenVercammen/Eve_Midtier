@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface AuthService {
 
-    String getAccessTokenFromEveSso(String code);
-
     LoginLinkContract getLoginLink();
 
     JwtLoginResponse retrieveJwtFromEve(JwtLoginRequest jwtLoginRequest);

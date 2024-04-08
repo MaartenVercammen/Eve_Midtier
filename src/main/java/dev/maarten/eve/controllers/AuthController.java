@@ -5,23 +5,21 @@ import dev.maarten.eve.models.contract.JwtLoginResponse;
 import dev.maarten.eve.models.contract.LoginLinkContract;
 import dev.maarten.eve.services.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/login")
 public class AuthController {
 
     private final AuthService authService;
 
-    @GetMapping("/login/link")
+    @GetMapping("/link")
     public LoginLinkContract getLoginLink() {
         return authService.getLoginLink();
     }
 
-    @PostMapping("/login/code")
+    @PostMapping("/code")
     public JwtLoginResponse retrieveJwtFromEve(@RequestBody JwtLoginRequest jwtLoginRequest) {
         return authService.retrieveJwtFromEve(jwtLoginRequest);
     }

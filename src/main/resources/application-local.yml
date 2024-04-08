@@ -1,5 +1,0 @@
-feign:
-  client:
-    config:
-      eve-sso:
-        loggerLevel: full

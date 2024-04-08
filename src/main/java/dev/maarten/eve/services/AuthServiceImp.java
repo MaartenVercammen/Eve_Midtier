@@ -35,13 +35,6 @@ public class AuthServiceImp implements AuthService {
     @Value("${auth.state}")
     private String state;
 
-    public String getAccessTokenFromEveSso(String code) {
-        EveSsoRequest ssoRequest = new EveSsoRequest("authorization_code", code);
-        var response = client.getAccessTokenFromEveSso(ssoRequest);
-        log.info("Response: {}", response);
-        return response.access_token();
-    }
-
     /*
     Link looks like https://login.eveonline.com/v2/oauth/authorize/&scope=esi-characters.read_blueprints.v1&state=<unique-string>
      */
@@ -64,7 +57,7 @@ public class AuthServiceImp implements AuthService {
                 .grant_type("authorization_code")
                 .build();
         log.info("Calling eve with code {}", eveSsoRequest.code());
-        EveSsoResponse response = client.getAccessTokenFromEveSso(eveSsoRequest);
+        EveSsoResponse response = client.getAccessTokenFromEveSso("grant_type=" + eveSsoRequest.grant_type() + "&code=" + eveSsoRequest.code());
         return JwtLoginResponse.builder()
                 .token(response.access_token())
                 .build();

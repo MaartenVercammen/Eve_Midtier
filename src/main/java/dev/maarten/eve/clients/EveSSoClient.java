@@ -1,15 +1,14 @@
 package dev.maarten.eve.clients;
 
-import dev.maarten.eve.models.auth.EveSsoRequest;
 import dev.maarten.eve.models.auth.EveSsoResponse;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "eve-sso", url = "https://login.eveonline.com")
+@FeignClient(name = "eve-sso", url = "https://login.eveonline.com", configuration = EveSsoClientConfig.class)
 public interface EveSSoClient {
 
-    @RequestMapping(method = RequestMethod.POST, value = "/oauth/token", consumes = "application/x-www-form-urlencoded")
-    EveSsoResponse getAccessTokenFromEveSso(EveSsoRequest request);
+    @PostMapping(value = "/v2/oauth/token", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    EveSsoResponse getAccessTokenFromEveSso(@RequestBody String request);
 }
