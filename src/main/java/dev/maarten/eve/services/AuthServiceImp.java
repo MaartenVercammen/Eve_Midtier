@@ -1,5 +1,6 @@
 package dev.maarten.eve.services;
 
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import dev.maarten.eve.clients.EveSSoClient;
 import dev.maarten.eve.models.auth.EveSsoRequest;
 import dev.maarten.eve.models.auth.EveSsoResponse;
@@ -9,6 +10,7 @@ import dev.maarten.eve.models.contract.JwtLoginResponse;
 import dev.maarten.eve.models.contract.LoginLinkContract;
 import dev.maarten.eve.models.enums.Schema;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -30,8 +32,6 @@ public class AuthServiceImp implements AuthService {
     private String redirect_uri;
     @Value("${auth.client_id}")
     private String clientId;
-    @Value("${auth.scope}")
-    private String scope;
     @Value("${auth.state}")
     private String state;
 
@@ -49,6 +49,7 @@ public class AuthServiceImp implements AuthService {
         return LoginLinkContract.builder().url(loginLink.getLink()).build();
     }
 
+    @SneakyThrows
     @Override
     public JwtLoginResponse retrieveJwtFromEve(JwtLoginRequest jwtLoginRequest) {
         if (!jwtLoginRequest.state().equals(state)) throw new RuntimeException("Code has been tampered with");
@@ -58,8 +59,10 @@ public class AuthServiceImp implements AuthService {
                 .build();
         log.info("Calling eve with code {}", eveSsoRequest.code());
         EveSsoResponse response = client.getAccessTokenFromEveSso("grant_type=" + eveSsoRequest.grant_type() + "&code=" + eveSsoRequest.code());
+        log.info(new JsonMapper().writeValueAsString(response));
         return JwtLoginResponse.builder()
-                .token(response.access_token())
+                .jwtToken(response.access_token())
+                .refreshToken(response.refresh_token())
                 .build();
     }
 
@@ -68,8 +71,13 @@ public class AuthServiceImp implements AuthService {
         params.put("response_type", "code");
         params.put("redirect_uri", redirect_uri);
         params.put("client_id", clientId);
-        params.put("scope", scope.replaceAll(" ", "%20"));
+        params.put("scope", getScope());
         params.put("state", state);
         return params;
+    }
+
+    private String getScope() {
+        String scope = "publicData esi-wallet.read_character_wallet.v1";
+        return scope.replaceAll(" ", "%20");
     }
 }
