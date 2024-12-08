@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Remove Secrets ###
+/src/main/resources/application-secrets.yml

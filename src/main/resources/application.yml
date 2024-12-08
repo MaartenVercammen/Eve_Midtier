@@ -8,8 +8,8 @@ server:
   port: 8080
 
 auth:
-  client_id: 6f173e1c973d47fdadd63ecc9c2b08ca
-  secret_key: jClrWcLY5GjXgU1mIEGh1nG32RjlMN7l2gr01GOe
+  client_id: { { client_id } }
+  secret_key:  { { secret_key } }
   path: /v2/oauth/authorize/
   domain: login.eveonline.com
   redirect_uri: http://localhost:4200/auth
