@@ -1,4 +1,4 @@
-package dev.maarten.eve.models.auth;
+package dev.maarten.eve.authentication.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

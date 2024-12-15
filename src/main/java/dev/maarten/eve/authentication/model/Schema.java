@@ -1,4 +1,4 @@
-package dev.maarten.eve.models.enums;
+package dev.maarten.eve.authentication.model;
 
 import lombok.Getter;
 

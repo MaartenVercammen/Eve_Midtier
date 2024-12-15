@@ -1,5 +1,6 @@
 package dev.maarten.eve.models.auth;
 
+import dev.maarten.eve.authentication.model.Link;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;

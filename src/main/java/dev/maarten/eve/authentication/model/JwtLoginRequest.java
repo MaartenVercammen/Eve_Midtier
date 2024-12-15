@@ -1,4 +1,4 @@
-package dev.maarten.eve.models.contract;
+package dev.maarten.eve.authentication.model;
 
 public record JwtLoginRequest(
         String code,

@@ -1,9 +1,9 @@
-package dev.maarten.eve.controllers;
+package dev.maarten.eve.authentication.controller;
 
-import dev.maarten.eve.models.contract.JwtLoginRequest;
-import dev.maarten.eve.models.contract.JwtLoginResponse;
-import dev.maarten.eve.models.contract.LoginLinkContract;
-import dev.maarten.eve.services.AuthService;
+import dev.maarten.eve.authentication.model.JwtLoginRequest;
+import dev.maarten.eve.authentication.model.JwtLoginResponse;
+import dev.maarten.eve.authentication.model.LoginLinkContract;
+import dev.maarten.eve.authentication.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,5 +1,6 @@
-package dev.maarten.eve.services;
+package dev.maarten.eve.core.services;
 
+import dev.maarten.eve.authentication.model.AccessToken;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,6 @@ import org.springframework.stereotype.Service;
 @Setter
 public class MemoryService {
 
-    private String jwt;
+    private AccessToken accessToken;
 
 }

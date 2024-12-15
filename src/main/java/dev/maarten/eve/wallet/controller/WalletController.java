@@ -1,6 +1,6 @@
-package dev.maarten.eve.controllers;
+package dev.maarten.eve.wallet.controller;
 
-import dev.maarten.eve.clients.EveWalletClient;
+import dev.maarten.eve.wallet.clients.EveWalletClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

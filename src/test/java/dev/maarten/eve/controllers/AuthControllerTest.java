@@ -1,7 +1,7 @@
 package dev.maarten.eve.controllers;
 
-import dev.maarten.eve.models.contract.LoginLinkContract;
-import dev.maarten.eve.services.AuthService;
+import dev.maarten.eve.authentication.controller.AuthController;
+import dev.maarten.eve.authentication.model.LoginLinkContract;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

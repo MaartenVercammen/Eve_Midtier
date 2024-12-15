@@ -1,6 +1,7 @@
-package dev.maarten.eve.clients;
+package dev.maarten.eve.authentication.client;
 
-import dev.maarten.eve.models.auth.EveSsoResponse;
+import dev.maarten.eve.authentication.client.config.EveSsoClientConfig;
+import dev.maarten.eve.authentication.model.EveSsoResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;

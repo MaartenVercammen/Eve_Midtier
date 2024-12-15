@@ -1,8 +1,8 @@
 package dev.maarten.eve.config;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import dev.maarten.eve.exceptions.AuthenticationException;
-import dev.maarten.eve.services.MemoryService;
+import dev.maarten.eve.authentication.exception.AuthenticationException;
+import dev.maarten.eve.core.services.MemoryService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwt;
@@ -54,8 +54,6 @@ public class JwtFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
                 return;
             }
-            System.out.println("token : " + accessToken);
-            memoryService.setJwt(accessToken);
             Claims claims = this.resolveClaims(request);
 
             if (claims != null & this.validateClaims(claims)) {

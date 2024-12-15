@@ -1,4 +1,4 @@
-package dev.maarten.eve.clients;
+package dev.maarten.eve.authentication.client.config;
 
 import feign.Logger;
 import feign.auth.BasicAuthRequestInterceptor;
