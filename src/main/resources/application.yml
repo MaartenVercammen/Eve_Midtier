@@ -3,6 +3,12 @@ spring:
     name: Eve
   main:
     banner-mode: "off"
+  datasource:
+    url: jdbc:h2:mem:eveDb
+    driverClassName: org.h2.Driver
+    username: { { database-user } }
+    password: { { database-password } }
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
 
 server:
   port: 8080
@@ -12,5 +18,5 @@ auth:
   secret_key:  { { secret_key } }
   path: /v2/oauth/authorize/
   domain: login.eveonline.com
-  redirect_uri: http://localhost:4200/auth
+  redirect_uri: http://localhost:4200/auth/eveCallback
   state: nJPh691hf1Paqq6ihR7f4BMB

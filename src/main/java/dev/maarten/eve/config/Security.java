@@ -11,6 +11,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -21,12 +23,13 @@ public class Security {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> corsConfig())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/login/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .csrf(csrf -> csrf.disable())
         ;
 
         return http.build();
@@ -38,7 +41,7 @@ public class Security {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200")
+                        .allowedOrigins("http://localhost:4200", "http://localhost")
                         .allowedMethods(
                                 HttpMethod.GET.name(),
                                 HttpMethod.POST.name()
